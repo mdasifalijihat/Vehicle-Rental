@@ -2,9 +2,10 @@ import { MdOutlineMenuOpen } from "react-icons/md";
 import { Link } from "react-router";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { GiEgyptianProfile } from "react-icons/gi";
 
 const Navbar = () => {
-  const { user, logout } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <div className="navbar bg-base-100 shadow-md px-4">
@@ -53,9 +54,17 @@ const Navbar = () => {
       <div className="navbar-end gap-2 flex items-center">
         {user ? (
           <>
-            {user.photoURL && <img src={user.photoURL} />}
-            <span>{user.email}</span>
-            <button onClick={logout}>Logout</button>
+            {user.photoURL ? (
+              <img
+                src={user.photoURL}
+                alt="User Profile"
+                className="w-20 h-20 rounded-full object-cover"
+              />
+            ) : (
+              <Link to="/dashboard">
+                <GiEgyptianProfile size={24} className="text-red-500" />
+              </Link>
+            )}
           </>
         ) : (
           <>
