@@ -37,7 +37,7 @@ const Banner = () => {
         {vehicles.map((vehicle) => (
           <div
             key={vehicle.id}
-            className="min-w-[250px] bg-white shadow-lg rounded-xl overflow-hidden flex-shrink-0"
+            className="min-w-62.5 bg-white shadow-lg rounded-xl overflow-hidden shrink-0"
           >
             <img
               src={vehicle.image || defaultImage}
