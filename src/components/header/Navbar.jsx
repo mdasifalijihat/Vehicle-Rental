@@ -1,9 +1,10 @@
 import { MdOutlineMenuOpen } from "react-icons/md";
 import { Link } from "react-router";
-// import { AuthContext } from "../context/AuthContext"; // future use
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
-  // const { user, logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   return (
     <div className="navbar bg-base-100 shadow-md px-4">
@@ -15,7 +16,7 @@ const Navbar = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-1 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
               <Link to="/">Home</Link>
@@ -49,26 +50,23 @@ const Navbar = () => {
       </div>
 
       {/* Right */}
-      <div className="navbar-end gap-2">
-        {/* user ? (
+      <div className="navbar-end gap-2 flex items-center">
+        {user ? (
           <>
-            <span className="hidden md:block font-medium">
-              {user.email}
-            </span>
-            <button onClick={logout} className="btn btn-outline btn-error btn-sm">
-              Logout
-            </button>
+            {user.photoURL && <img src={user.photoURL} />}
+            <span>{user.email}</span>
+            <button onClick={logout}>Logout</button>
           </>
-        ) : ( */}
-        <>
-          <Link to="/login" className="btn btn-outline btn-sm">
-            Login
-          </Link>
-          <Link to="/register" className="btn btn-primary btn-sm">
-            Register
-          </Link>
-        </>
-        {/* ) */}
+        ) : (
+          <>
+            <Link to="/SignIn" className="btn btn-outline btn-sm">
+              Login
+            </Link>
+            <Link to="/SignUp" className="btn btn-primary btn-sm">
+              Register
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );
